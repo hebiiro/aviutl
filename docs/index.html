@@ -45,6 +45,7 @@ a.download {
 	<li><a href="#CopyFilter">CopyFilter - フィルタのコピペ</a> - <a class="download">AviUtl-Plugin-CopyFilter</a>
 	<li><a href="#SelectFavoriteFont">SelectFavoriteFont - お気に入りフォント選択</a> - <a class="download">AviUtl-Plugin-SelectFavoriteFont</a>
 	<li><a href="#SelectEasing">SelectEasing - イージング簡単選択</a> - <a class="download">AviUtl-Plugin-SelectEasing</a>
+	<li><a href="#SelectScene">SelectScene - シーン簡単選択</a> - <a class="download">AviUtl-Plugin-SelectScene</a>
 	<li><a href="#ShowWaveform">ShowWaveform - アイテム内音声波形</a> - <a class="download">AviUtl-Plugin-ShowWaveform</a>
 	<li><a href="#LevelMeter">LevelMeter - レベルメーター</a> - <a class="download">AviUtl-Plugin-LevelMeter</a>
 	<li><a href="#AdjustLastFrame">AdjustLastFrame - 最終フレーム自動調整</a> - <a class="download">AviUtl-Plugin-AdjustLastFrame</a>
@@ -85,6 +86,7 @@ AviUtl の各ウィンドウを一つのウィンドウにまとめます。<br>
 <p>
 テキストオブジェクトを一文字ずつに分解します。<br>
 <a class="download">AviUtl-Plugin-SplitText</a><br>
+<script type="application/javascript" src="https://embed.nicovideo.jp/watch/sm40790519/script?w=640&h=360"></script><noscript><a href="https://www.nicovideo.jp/watch/sm40790519">テキスト分解プラグイン【AviUtl】</a></noscript>
 </p>
 
 <h3 id="DragFilter">DragFilter - フィルタドラッグ移動</h3>
@@ -111,6 +113,12 @@ AviUtl の各ウィンドウを一つのウィンドウにまとめます。<br>
 イージング番号を画像から選択できるようにします。<br>
 <a class="download">AviUtl-Plugin-SelectEasing</a><br>
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">蛇色氏の「イージング選択プラグイン」<br>＋<br>蝙蝠の目氏の「イージング設定時短プラグイン」<a href="https://twitter.com/hashtag/AviUtl?src=hash&amp;ref_src=twsrc%5Etfw">#AviUtl</a> <a href="https://t.co/4syrTGd66j">https://t.co/4syrTGd66j</a><a href="https://t.co/N43rx44VUM">https://t.co/N43rx44VUM</a> <a href="https://t.co/TObLIelyCK">pic.twitter.com/TObLIelyCK</a></p>&mdash; inea / イネア (@i_ne_a) <a href="https://twitter.com/i_ne_a/status/1505471470478458885?ref_src=twsrc%5Etfw">March 20, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</p>
+
+<h3 id="SelectScene">SelectScene - シーン簡単選択</h3>
+<p>
+シーンを簡単に切り替えられるようにします。<br>
+<a class="download">AviUtl-Plugin-SelectScene</a><br>
 </p>
 
 <h3 id="ShowWaveform">ShowWaveform - アイテム内音声波形</h3>
@@ -181,16 +189,18 @@ AviUtl-Tool-aviutl.ini.gui
 -->
 	</main>
 <script type="text/javascript">
-window.onload = function()
+window.onload = async function ()
 {
 	// a.download エレメントを最新のリリースに置換する。
 	const downloadElements = document.querySelectorAll("a.download");
-	downloadElements.forEach(async function(element) {
+	for (let i in downloadElements)
+	{
+		const element = downloadElements[i];
 		const name = element.textContent;
 		const json = await fetch("https://api.github.com/repos/hebiiro/" + name + "/releases/latest").then(r => r.json());
 		element.href = json["assets"][0]["browser_download_url"];
 		element.textContent = json["name"] + " をダウンロード";
-	});
+	}
 }
 </script>
 </body>
